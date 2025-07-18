@@ -21,9 +21,9 @@
             if (!file) return;
             const fd = new FormData();
             fd.append('file', file);
-            fd.append('upload_preset', 'YOUR_UNSIGNED_PRESET');
+            fd.append('upload_preset', 'testes');
             try {
-              const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload',
+              const res = await fetch('https://api.cloudinary.com/v1_1/daafwau38/image/upload',
                                       { method:'POST', body: fd });
               const json = await res.json();
               console.log('[uploadPic] Cloudinary response', json);
