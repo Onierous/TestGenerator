@@ -11,7 +11,6 @@
     <main class="container">
       <h1>DJ Landing-Page Generator</h1>
 
-      <!-- Alpine form -->
       <form x-data="pageMaker()" @submit.prevent="generate()">
         <label>Name
           <input x-model="dj.name" required>
@@ -32,7 +31,6 @@
         <button>Generate page</button>
       </form>
 
-      <!-- Preview / download -->
       <article x-show="previewUrl">
         <h2>Preview / Download</h2>
         <iframe :src="previewUrl" width="100%" height="400"></iframe>
@@ -55,7 +53,7 @@
             const file = e.target.files[0];
             const fd = new FormData();
             fd.append('file', file);
-            fd.append('upload_preset', 'unsigned');   // change to your Cloudinary preset
+            fd.append('upload_preset', 'unsigned'); // change to your Cloudinary preset
             const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {method:'POST', body:fd});
             const json = await res.json();
             this.dj.pic = json.secure_url;
