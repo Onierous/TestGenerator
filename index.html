@@ -6,31 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 
+    <!-- 1.  DEFINE pageMaker BEFORE Alpine loads -->
     <script>
       window.pageMaker = function () {
+        console.log('[Alpine] pageMaker() called');
+
         return {
           dj: { name:'', tagline:'', pic:'', soundcloud:'' },
           previewUrl: null,
 
           async uploadPic (e) {
+            console.log('[uploadPic] file selected', e.target.files);
             const file = e.target.files[0];
             if (!file) return;
             const fd = new FormData();
             fd.append('file', file);
-            fd.append('upload_preset', 'testes');
-            const res = await fetch('https://api.cloudinary.com/v1_1/daafwau38/image/upload',
-                                    { method:'POST', body: fd });
-            const json = await res.json();
-            this.dj.pic = json.secure_url;
+            fd.append('upload_preset', 'YOUR_UNSIGNED_PRESET');
+            try {
+              const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload',
+                                      { method:'POST', body: fd });
+              const json = await res.json();
+              console.log('[uploadPic] Cloudinary response', json);
+              this.dj.pic = json.secure_url;
+            } catch (err) {
+              console.error('[uploadPic] error', err);
+            }
           },
 
           generate () {
+            console.log('[generate] clicked');
+            console.log('[generate] dj object', JSON.stringify(this.dj));
+
             const html = this.renderPage();
+            console.log('[generate] generated HTML length', html.length);
+
             this.previewUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+            console.log('[generate] data URL created', this.previewUrl);
           },
 
           renderPage () {
             const { name, tagline, pic, soundcloud } = this.dj;
+            console.log('[renderPage] building page', { name, tagline, pic, soundcloud });
+
             return `
 <!doctype html>
 <html>
