@@ -99,21 +99,13 @@
 
         <button>Generate page</button>
       </form>
-
-<!-- Preview / download -->
-<article x-show="previewUrl">
-  <h2>Ready!</h2>
-
-  <!-- Opens the landing page in a new tab -->
-  <a class="button" :href="previewUrl" target="_blank" rel="noopener">
-    Open Preview ↗
-  </a>
-
-  <!-- Forces a download of the generated index.html -->
-  <a class="button" :href="downloadUrl" download="index.html">
-    Download index.html
-  </a>
-</article>
+      
+      <!-- Generated page link -->
+      <p x-show="previewUrl">
+        <a class="button" :href="previewUrl" target="_blank" rel="noopener">
+          Open your DJ landing page ↗
+        </a>
+      </p>
     </main>
   </body>
 </html>
