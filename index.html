@@ -54,7 +54,7 @@
             const fd = new FormData();
             fd.append('file', file);
             fd.append('upload_preset', 'unsigned'); // change to your Cloudinary preset
-            const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {method:'POST', body:fd});
+            const res = await fetch('https://api.cloudinary.com/v1_1/daafwau38/image/upload', {method:'POST', body:fd});
             const json = await res.json();
             this.dj.pic = json.secure_url;
           },
