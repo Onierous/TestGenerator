@@ -100,12 +100,20 @@
         <button>Generate page</button>
       </form>
 
-      <article x-show="previewUrl">
-        <h2>Preview / Download</h2>
-        <iframe :src="previewUrl" width="100%" height="400"></iframe>
-        <br>
-        <a class="button" :href="downloadUrl" download="index.html">Download index.html</a>
-      </article>
+<!-- Preview / download -->
+<article x-show="previewUrl">
+  <h2>Ready!</h2>
+
+  <!-- Opens the landing page in a new tab -->
+  <a class="button" :href="previewUrl" target="_blank" rel="noopener">
+    Open Preview ↗
+  </a>
+
+  <!-- Forces a download of the generated index.html -->
+  <a class="button" :href="downloadUrl" download="index.html">
+    Download index.html
+  </a>
+</article>
     </main>
   </body>
 </html>
